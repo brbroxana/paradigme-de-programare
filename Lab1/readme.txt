@@ -1,0 +1,1 @@
+proiect/scripts/readme.txt
