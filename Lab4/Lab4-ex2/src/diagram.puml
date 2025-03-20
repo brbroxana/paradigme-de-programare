@@ -1,0 +1,38 @@
+@startuml
+' Definirea claselor
+class BankAccount {
+    - availableAmount: Double
+    - cardNumber: String
+    - expirationDate: Date
+    - cvvCode: Int
+    - userName: String
+    + updateAmount(value: Double): Boolean
+    + getAvailableAmount(): Double
+}
+
+interface PaymentMethod {
+    + pay(fee: Double): Boolean
+}
+
+class CardPayment {
+    - bankAccount: BankAccount
+    + pay(fee: Double): Boolean
+}
+
+class CashPayment {
+    - availableAmount: Double
+    + pay(fee: Double): Boolean
+}
+
+class TicketPurchaseSystem {
+    - paymentMethod: PaymentMethod
+    + purchaseTicket(ticketPrice: Double): Boolean
+}
+
+' Definirea relațiilor
+PaymentMethod <|.. CardPayment  : implements
+PaymentMethod <|.. CashPayment  : implements
+CardPayment --> BankAccount     : uses
+TicketPurchaseSystem --> PaymentMethod : uses
+
+@enduml
